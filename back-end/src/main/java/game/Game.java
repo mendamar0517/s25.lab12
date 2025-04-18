@@ -18,12 +18,16 @@ public class Game {
     private final Player player;
     private final List<Game> history;
 
+    public List<Game> getHistory() {
+        return this.history;
+    }
+
     public Game() {
-        this(new Board(), Player.PLAYER0);
+        this(new Board(), Player.PLAYER0, new ArrayList<>()); // ✅ FIXED
     }
 
     public Game(Board board, Player nextPlayer) {
-        this(board, nextPlayer, List.of());
+        this(board, nextPlayer, new ArrayList<>()); // ✅ FIXED
     }
 
     public Game(Board board, Player nextPlayer, List<Game> history) {
@@ -49,6 +53,13 @@ public class Game {
         newHistory.add(this);
         Player nextPlayer = this.player == Player.PLAYER0 ? Player.PLAYER1 : Player.PLAYER0;
         return new Game(this.board.updateCell(x, y, this.player), nextPlayer, newHistory);
+    }
+
+    public Game undo() {
+        if (this.history.isEmpty()) {
+            return this;
+        }
+        return this.history.get(this.history.size() - 1);
     }
 
     public Player getWinner() {

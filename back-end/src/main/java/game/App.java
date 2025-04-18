@@ -38,11 +38,15 @@ public class App extends NanoHTTPD {
         } else if (uri.equals("/play")) {
             // e.g., /play?x=1&y=1
             this.game = this.game.play(Integer.parseInt(params.get("x")), Integer.parseInt(params.get("y")));
+        } else if (uri.equals("/undo")) {
+            if (!this.game.getHistory().isEmpty()) {
+                this.game = this.game.getHistory().get(this.game.getHistory().size() - 1);
+            }
         }
-        // Extract the view-specific data from the game and apply it to the template.
         GameState gameplay = GameState.forGame(this.game);
         return newFixedLengthResponse(gameplay.toString());
     }
+    
 
     public static class Test {
         public String getText() {

@@ -1,5 +1,6 @@
 interface GameState {
   cells: Cell[];
+  instructions: string;
 }
 
 interface Cell {

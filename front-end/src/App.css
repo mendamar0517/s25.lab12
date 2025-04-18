@@ -1,47 +1,94 @@
+/* Game board */
 #board {
   display: grid;
-  grid-template-columns: auto auto auto;
-  background-color: #2196F3;
-  padding: 10px
+  grid-template-columns: repeat(3, 1fr);
+  background-color: #fff;
+  padding: 10px;
+  gap: 5px;
+  border-radius: 8px;
+  border: 2px solid #000;
 }
 
+/* Cell style */
 .cell {
-  background-color: rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(0, 0, 0, 0.8);
-  padding: 20px;
-  font-size: 30px;
-  height: 25vmin;
+  background-color: rgba(255, 255, 255, 1);
+  border: 2px solid #000;
+  padding: 0;
+  font-size: 5vmin;
+  height: 20vmin;
+  width: 100%;
   text-align: center;
+  box-sizing: border-box;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
 }
 
-#bottombar {
-  height: 5vh;
+.cell:hover {
+  background-color: rgba(255, 255, 255, 0.7);
+  transform: scale(1.03);
 }
 
+/* Highlight playable cells */
+.playable {
+  background-color: #bbb;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Instruction display */
 #instructions {
-  height: 5vh;
+  height: auto;
+  min-height: 40px;
   background-color: white;
-  padding: 0px;
-  margin: 0px;
+  padding: 12px;
+  margin: 10px auto;
   text-align: center;
-  border: 1px solid black;
+  border: 2px dashed #000;
+  font-size: 1.4rem;
+  font-weight: bold;
+  width: fit-content;
+  border-radius: 10px;
+}
+
+/* Bottom buttons */
+#bottombar {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
 }
 
 #bottombar button {
-  width: 50%;
-  /* height: 100%; */
-  margin: 0;
-  padding: 0;
-  position: relative;
-  float: left;
-  font-size: 2vw
+  flex: 1;
+  font-size: 1.2rem;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  background-color: #000;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
+#bottombar button:hover {
+  background-color: #444;
+}
+
+#bottombar button:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
+/* Page reset */
 html,
 body {
   height: 100%;
   margin: 0;
   padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f0f0f0;
 }
-
-.playable { background-color: red;}
